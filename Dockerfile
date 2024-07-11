@@ -1,12 +1,11 @@
-FROM 	node:20.15.1-bookworm-slim
+FROM node:20.15.1-bookworm-slim
 
-RUN npm install -g npm@9.1.3
+RUN npm install -g npm@latest
 
-ADD package.json .
-ADD index.js .
-ADD build .
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --only=production
 COPY . .
-RUN npm install
 
 EXPOSE 8080
 
